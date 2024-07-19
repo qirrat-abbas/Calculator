@@ -1,1 +1,1 @@
-# Calculator
+This is a fully responsive Mathematical Calculator built using HTML, CSS, and JavaScript. It features a user-friendly interface with dark and light mode options, ensuring a pleasant experience across all devices. The calculator uses CSS Grids for a seamless layout on different screen sizes and performs accurate arithmetic operations through JavaScript. 
