@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="index.css">
+</head>
+<body>
+    <div class="container">
+        <div class="calculator" id="darkmode"> <!--making calcultor div because the properties must be applied onto the parent for implemntation onto the child-->
+            <div class="togglecontainer">
+                <span id="modelabel"></span>
+                <input type="checkbox" id="toggle"> <!--this is our checkbox label and we will hide the label-->
+                <label for="toggle"></label>
+            </div>
+    
+            <div id="answer">
+                <span id="ans">0</span>
+            </div>
+    
+            <button id="c" type="button">C</button>
+            <button type="button" class="operators" id="bracket1" >(</button>
+            <button type="button" class="operators" id="bracket2">)</button>
+            <button type="button" class="operators" id="multiply">*</button>
+    
+            <button type="button" class="numbers" id="btn9">9</button>
+            <button type="button" class="numbers" id="btn8">8</button>
+            <button type="button" class="numbers" id="btn7">7</button>
+            <button type="button" class="operators" id="divide">/</button>
+    
+            <button type="button" class="numbers" id="btn6">6</button>
+            <button type="button" class="numbers" id="btn5">5</button>
+            <button type="button" class="numbers" id="btn4">4</button>
+            <button type="button" class="operators" id="add">+</button>
+    
+            <button type="button" class="numbers" id="btn3">3</button>
+            <button type="button" class="numbers" id="btn2">2</button>
+            <button type="button" class="numbers" id="btn1">1</button>
+            <button type="button" class="operators" id="subtract">-</button>
+           
+            <button type="button" class="numbers" id="btn0">0</button>
+            <button type="button" class="numbers" id="btn00">00</button>
+            <button type="button" class="operators"id="equalto">=</button>
+        </div>
+    </div>
+
+    <script>
+        let answer = "";
+        let mode = document.querySelector("#toggle");
+
+        let currentMode = "dark";
+
+        //changemode() works only for single time
+        //changemode without bracket mean tellinh eventListner to execute everytime pressed
+        mode.addEventListener("click", changemode);
+
+        function changemode(){
+            if ( currentMode === "light" ){
+                currentMode = "dark";
+                //classlist removes and add classes in addition to class applied
+                document.querySelector('.calculator').classList.remove("lightmode");
+                document.querySelector('.calculator').classList.add("darkmode");
+
+                document.querySelector(".numbers").classList.add("numberslight");
+                document.querySelector("#equalto").style.backgroundColor = "rgb(54, 117, 54)";
+                document.querySelector("#c").style.backgroundColor = "rgb(132, 16, 16)";
+                document.querySelector("#c").style.color = "red";
+                document.querySelector("#ans").style.color = "wheat";
+            }
+
+            /*getElementsByClassName returns a collection of elements, not a single element. Therefore, you 
+            need to loop through each element in the collection to apply styles individually*/
+            else{
+                currentMode = "light";
+                document.querySelector('.calculator').classList.remove("darkmode");
+                document.querySelector('.calculator').classList.add("lightmode");
+
+                /*Changing background color for 'numbers' - light modd
+                var numbers = document.getElementsByClassName('numbers');
+                for (var i = 0; i < numbers.length; i++) {
+                    numbers[i].style.backgroundColor = "rgb(11, 140, 117)";
+                }*/
+
+                document.querySelector("#equalto").style.backgroundColor = "green";
+                document.querySelector("#equalto").classList.add("equaltolight")
+                document.querySelector("#c").style.backgroundColor = "rgb(0 0 0)";
+                document.querySelector("#c").style.color = "red";
+                document.querySelector("#ans").style.color = "#65635e";
+
+                //since many operators so need to loop through them
+                document.querySelectorAll(".operators").forEach( function(operator) {
+                    if(operator.id != "equalto"){
+                        operator.style.color = "rgb(255, 0, 85)";
+                    }
+                });
+
+                document.querySelectorAll(".numbers").forEach( function (number){
+                    number.classList.add("numberslight");
+                });
+            }
+
+            console.log(currentMode);
+        }
+
+        //main working for the whole calculator
+
+        /*array.from - taking all buttons and making them an array
+          foreach    - to apply actionlistener listening all events at once for button and passing ('e' ie or event)
+                       as a parameter for our actionListener */
+        
+        let btn = document.querySelectorAll("button");
+        Array.from(btn).forEach((button) => {
+            button.addEventListener("click", (e) => {
+
+                if(e.target.innerHTML == "C"){
+                    answer = "";
+                    document.getElementById("ans").innerText = answer;
+                }
+
+                else if(e.target.innerHTML == "="){
+                    answer = eval(answer);
+                    document.getElementById("ans").innerText = answer;
+                }
+
+                else{
+                    answer = answer + e.target.innerHTML;
+                    document.getElementById("ans").innerText = answer;
+                }
+            })
+        })
+
+        
+    </script>
+</body>
+</html>

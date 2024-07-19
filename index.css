@@ -1,0 +1,269 @@
+body{
+    box-sizing: border-box;
+    margin: 0px; padding: 0px;
+    height: 100vh;
+}
+
+.calculator{
+    z-index: 0;
+    height: 65vh;
+    width: 75vw;
+    padding: 5px 20px;
+    border-radius: 5px;
+    display: grid;
+    background-color: rgb(28, 28, 28);
+    grid-template-rows: 0.45fr 1fr 0.5fr 0.5fr 0.5fr 0.5fr 0.5fr 0.3fr;
+    grid-template-columns: 0.5fr 0.5fr 0.5fr 0.5fr;
+    grid-template-areas:
+        "toggle toggle toggle toggle"
+        "answer answer answer answer"
+        "c-button brckt1 brckt2 mult"
+        "btn9 btn8 btn7 divide"
+        "btn6 btn5 btn4 add"
+        "btn3 btn2 btn1 subt"
+        "btn0 btn00 equal equal"
+}
+
+.darkmode{
+    background-color: rgb(28, 28, 28);
+    color: wheat;
+    transition: 0.3s ease;
+}
+
+.darkmode:hover{
+    box-shadow: 0px 0px 5px 2px rgb(156, 156, 156);
+}
+
+.lightmode{
+    background-color: rgb(201, 200, 200);
+    transition: 0.3s ease;
+}
+
+.lightmode:hover{
+    box-shadow: 0px 0px 5px 2px rgb(73, 72, 72);
+}
+
+.container{
+    width: 100vw; height: 100vh;
+    background-image: linear-gradient(130deg,rgb(187 183 183), #8e538e, #4b4b86, black);
+    display: flex;
+    justify-content: center; align-items: center;
+}
+
+
+
+/* #changemode{
+    height: 20px; width: 90px;
+    background: white;
+    color: bisque;
+    font-size: small;
+    border-radius: 30px;
+    text-align: right;
+    grid-template-columns: mode;
+}*/
+#answer{
+    grid-area: answer;
+    display: grid; /*property mjust be set to display:grid and not block for parent*/
+}
+
+#ans{
+    width: 100%;
+    display: flex;
+    justify-content: right;
+    color: wheat;
+    font-weight: bold;
+    font-size: 55px;
+    grid-row: 2/3;
+    grid-column: 4/5;
+    margin-top: 10%;
+    margin-bottom: 5px;
+    overflow: auto;
+}
+
+button{
+    margin: 5px;
+    padding: auto;
+    border-radius: 100px;
+    opacity: 0.5; border: none;
+    font-size: 25px; font-family: 'Roboto', sans-serif;
+    z-index: 1;
+}
+
+/* button active indicating when a button is clicked*/
+button:active{
+    font-size: 30px; font-weight: bold;
+    transition: 0.5s;
+} 
+
+button:hover{
+    transition: all 0.2s;
+}
+
+.numbers{
+    color: rgb(255, 255, 255); background-color: rgb(11, 140, 117);
+}
+
+.numbers:hover{
+    box-shadow: 0px 0px 5px 2px white;
+}
+
+.numberslight:hover{
+    box-shadow: 0px 0px 5px 2px rgb(115, 117, 117);
+}
+
+.operators{
+    color: rgb(190, 52, 98);
+    background-color: rgb(239, 101, 239); opacity: 0.5;
+    font-weight: bold; font-size: x-large;
+}
+
+.operators:hover{
+    box-shadow: 0px 0px 5px 2px rgb(190, 52, 98);
+}
+
+#c{
+    grid-area: c-button;
+    font-weight: bold; 
+    background-color: rgb(132, 16, 16); opacity: 0.3;
+    color: red;
+}
+
+#c:hover{
+    box-shadow: 0px 0px 5px 2px red;
+}
+
+#bracket1{
+    grid-area: brckt1;
+}
+
+#bracket2{
+    grid-area: brckt2;
+}
+
+#multiply{
+    grid-area: mult;
+}
+
+#btn9{
+    grid-area: btn9;
+}
+
+#btn8{
+    grid-area: btn8;
+}
+
+#btn7{
+    grid-area: btn7;
+}
+
+#divide{
+    grid-area: divide;
+}
+
+#btn6{
+    grid-area: btn6;
+}
+
+#btn5{
+    grid-area: btn5;
+}
+
+#btn4{
+    grid-area: btn4;
+}
+
+#add{
+    grid-area: add;
+}
+
+#btn3{
+    grid-area: btn3;
+}
+
+#btn2{
+    grid-area: btn2;
+}
+
+#btn1{
+    grid-area: btn1;
+}
+
+#subtract{
+    grid-area: subt;
+}
+
+#btn0{
+    grid-area: btn0;
+}
+
+#btn00{
+    grid-area: btn00;
+}
+
+#equalto{
+    grid-area: equal;
+    color: black;
+    background-color: rgb(54, 117, 54); font-weight: bold;
+}
+
+#equalto:hover{
+    box-shadow: 0px 0px 5px 2px rgb(108, 245, 138);
+}
+
+.equaltolight{
+    color: black;
+}
+
+.equaltolight:hover{
+    box-shadow: 0px 0px 5px 2px black;
+}
+
+.togglecontainer{
+    width: 100%;
+    grid-area: toggle;
+    grid-row: 1 / 2; grid-column: 1 / 5;
+    display: flex; justify-content: right; align-items: center;
+}
+/*using justify content for horizantal allignment
+  using align-item for vertical allignment
+  
+  and msut be applied on the parent container ie:toggle conrainer*/
+
+#toggle {
+    display: none;
+}
+
+/*in order to apply allginment property for buttons, flexbox properties applied to it's parent */
+
+/*label is our body for toggle button*/
+label {
+    display: inline-block;
+    width: 60px;
+    height: 24px;
+    background-color: #fffdfd;
+    border-radius: 18px;
+    position: relative;
+    /*setting position:relative for its children, the parent elem must have positioned bproperty set*/ 
+    cursor: pointer;
+}
+
+label::before { /*creating the round for the switch in label*/
+    content: ""; /*inserting no content but just a switch round for toggle*/
+    position: absolute;
+    top: 2px;
+    left: 2.5px;
+    width: 20px;
+    height: 20px;
+    background-color: rgb(63, 63, 63);
+    border-radius: 50%;
+    transition: transform 0.3s;
+}
+
+#toggle:checked + label {
+    background-color: #4c6161;
+}
+
+#toggle:checked + label::before {
+    transform: translateX(35px); /*moves the toggle button after moving*/
+    transition: 0.5s;
+}
